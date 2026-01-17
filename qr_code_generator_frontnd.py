@@ -12,11 +12,11 @@ st.write("Enter a URL or text below to generate a QR code instantly.")
 url = st.text_input("Enter the URL or Text:", placeholder="https://www.google.com")
 
 # 2. Pick Colors (Optional feature for better UX)
-#col1, col2 = st.columns(2)
-#with col1:
-#    fill_color = st.color_picker("Pick the QR Color", "#000000")
-#with col2:
-#    back_color = st.color_picker("Pick the Background", "#FFFFFF")
+col1, col2 = st.columns(2)
+with col1:
+    fill_color = st.color_picker("Pick the QR Color", "#000000")
+with col2:
+    back_color = st.color_picker("Pick the Background", "#FFFFFF")
 
 # --- Generation Logic ---
 if st.button("Generate QR Code"):
@@ -32,7 +32,7 @@ if st.button("Generate QR Code"):
         qr.make(fit=True)
 
         # Create the image with user-selected colors
-        img = qr.make_image(fill_color, back_color)
+        img = qr.make_image(fill_color=fill_color, back_color=back_color)
 
         # --- The Important Part: Memory Buffer ---
         # Instead of saving to a file like "img.png", we save to a memory buffer
@@ -51,4 +51,5 @@ if st.button("Generate QR Code"):
             mime="image/png"
         )
     else:
+
         st.warning("Please enter some text or a URL first.")
